@@ -22,15 +22,18 @@ public class P42_2 {
 
         // step1 : find max
         Map.Entry<Integer, Integer> entity = findMaxPair(height);
-        Map.Entry<Integer, Integer> leftEntity = findMaxPair(Arrays.copyOfRange(height, 0, entity.getKey() - 1));
-        Map.Entry<Integer, Integer> rightEntity = findMaxPair(Arrays.copyOfRange(height, entity.getKey() + 1, height.length));
+        Map.Entry<Integer, Integer> leftEntity =
+            entity.getKey() == 0 ? findMaxPair(Arrays.copyOfRange(height, 0, entity.getKey() - 1)) : new AbstractMap.SimpleEntry<Integer, Integer>(null, 0);
+        Map.Entry<Integer, Integer> rightEntity =
+            entity.getKey() == height.length - 1 ? findMaxPair(Arrays.copyOfRange(height, entity.getKey() + 1, height.length)) : new AbstractMap.SimpleEntry<Integer, Integer>(null,
+                0);
 
-        if (leftEntity.getKey() == 0) {
+        if (leftEntity.getKey() == null || leftEntity.getKey() == 0) {
             // none
             return 0;
         }
 
-        if (rightEntity.getKey() == 0) {
+        if (leftEntity.getKey() == null || rightEntity.getKey() == 0) {
             // none
             return 0;
         }
@@ -40,10 +43,19 @@ public class P42_2 {
         // Map.Entry<Integer, Integer> rightMinEntity = findMinPair(Arrays.copyOfRange(height, entity.getKey(),
         // rightEntity.getKey()));
 
-        trap(Arrays.copyOfRange(height, 0, leftEntity.getKey()));
-        trap(Arrays.copyOfRange(height, rightEntity.getKey(), height.length - 1));
+        int occu = 0;
+        for (int i = leftEntity == null ? 0 : leftEntity.getKey(); i <= entity.getKey(); i++) {
+            occu += height[i];
+        }
+        for (int i = entity.getKey(); i <= rightEntity.getKey(); i++) {
+            occu += height[i];
+        }
 
-        return 0;
+         leftEntity.getValue() * (entity.getKey() - leftEntity.getKey()) - occu ;
+            trap(Arrays.copyOfRange(height, 0, leftEntity.getKey())) +
+            trap(Arrays.copyOfRange(height, rightEntity.getKey(), height.length - 1));
+
+         return 0;
 
     }
 
