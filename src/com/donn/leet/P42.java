@@ -4,7 +4,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Wrong anwser
+ *
+ */
 public class P42 {
+
     public static void main(String[] args) {
         // System.out.println(trap(new int[] { 5, 1, 2 })); // 1
         // System.out.println(trap(new int[] { 5, 4, 1, 2 })); // 1
