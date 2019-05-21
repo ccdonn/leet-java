@@ -1,7 +1,5 @@
 package com.donn.leet;
 
-import java.util.Arrays;
-
 public class P59 {
 
     public int[][] generateMatrix(int n) {
@@ -55,27 +53,8 @@ public class P59 {
     }
 
     public static void main(String[] args) {
-        print(new P59().generateMatrix(3));
-        print(new P59().generateMatrix(4));
+        Utils.printArray(new P59().generateMatrix(3));
+        Utils.printArray(new P59().generateMatrix(4));
     }
 
-    private static void print(int[][] array) {
-        StringBuilder sb = new StringBuilder();
-        if (array.length == 0 || array[0].length == 0) {
-            System.out.println(sb.toString());
-        } else {
-            sb.append("[");
-            Arrays.stream(array).forEach(v -> {
-                sb.append("[");
-                Arrays.stream(v).forEach(vv -> {
-                    sb.append(vv).append(", ");
-                });
-                sb.setLength(sb.length() - 2);
-                sb.append("],");
-            });
-            sb.setLength(sb.length() - 1);
-            sb.append("]");
-            System.out.println(sb.toString());
-        }
-    }
 }
