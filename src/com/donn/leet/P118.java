@@ -55,7 +55,11 @@ public class P118 {
 
     public static void main(String[] args) {
         // new P118().cnr(5, 3);
-        new P118().generate(15);
+        System.out.println(new P118().generate(15));
+
+        System.out.println(new P118().generate(0));
+        System.out.println(new P118().generate(1));
+        System.out.println(new P118().generate(2));
     }
 
 }
