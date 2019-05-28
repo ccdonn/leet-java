@@ -1,47 +1,25 @@
 package com.donn.leet;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class P94 {
-    public boolean isInterleave(String s1, String s2, String s3) {
-        if (s1.length() == 0) {
-            return s2.equals(s3);
+    public List<Integer> inorderTraversal(TreeNode root) {
+        if (root == null) {
+            return Collections.emptyList();
         }
-        if (s2.length() == 0) {
-            return s1.equals(s3);
+        List<Integer> list = new ArrayList<>();
+        if (root.left != null) {
+            list.addAll(inorderTraversal(root.left));
         }
-        while (true) {
-            int sameLen = 0;
-            if ((sameLen = sameStart(s1, s3)) > 0) {
-                s1 = s1.substring(sameLen);
-                s3 = s3.substring(sameLen);
-            } else if ((sameLen = sameStart(s2, s3)) > 0) {
-                s2 = s2.substring(sameLen);
-                s3 = s3.substring(sameLen);
-            } else {
-                return false;
-            }
-            if (s1.length() == 0 && s2.length() == 0 && s3.length() == 0) {
-                return true;
-            }
+
+        list.add(root.val);
+
+        if (root.right != null) {
+            list.addAll(inorderTraversal(root.right));
         }
-    }
 
-    private int sameStart(String s1, String s2) {
-        int min = Math.min(s1.length(), s2.length());
-        for (int i = 0; i < min; i++) {
-            if (s1.charAt(i) != s2.charAt(i)) {
-                return i;
-            }
-        }
-        return min;
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(new P94().sameStart("aabcc", "aabcc"));
-        System.out.println(new P94().sameStart("aabcc", "aadbbcbcac"));
-        System.out.println(new P94().sameStart("dbbca", "aadbbcbcac"));
-
-        System.out.println(new P94().isInterleave("aabcc", "dbbca", "aadbbcbcac"));
-        System.out.println(new P94().isInterleave("aabcc", "dbbca", "aadbbbaccc"));
+        return list;
     }
 }
